@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Qurilish Xizmatlari</h1>
+        <h2>🛠 Qurilish Xizmatlari</h2>
         
         <div class="services-grid">
             <!-- Oboy -->
@@ -17,9 +17,9 @@
                 <h3>Oboy yopishtirish</h3>
                 <p class="price">1 kv.m — 15 000 so'm</p>
                 <div class="input-group">
-                    <input type="number" id="sqm-oboy" placeholder="Necha kv.m?" min="1">
-                    <button onclick="calculate('Oboy yopishtirish', 15000, 'sqm-oboy')">Hisoblash</button>
+                    <input type="number" id="sqm-oboy" placeholder="Necha kv.m?" min="0" oninput="updateCalculation('Oboy yopishtirish', 15000, 'sqm-oboy', 'res-oboy')">
                 </div>
+                <div id="res-oboy" class="card-result"></div>
             </div>
 
             <!-- Plitka -->
@@ -27,9 +27,9 @@
                 <h3>Plitka terish</h3>
                 <p class="price">1 kv.m — 50 000 so'm</p>
                 <div class="input-group">
-                    <input type="number" id="sqm-plitka" placeholder="Necha kv.m?" min="1">
-                    <button onclick="calculate('Plitka terish', 50000, 'sqm-plitka')">Hisoblash</button>
+                    <input type="number" id="sqm-plitka" placeholder="Necha kv.m?" min="0" oninput="updateCalculation('Plitka terish', 50000, 'sqm-plitka', 'res-plitka')">
                 </div>
+                <div id="res-plitka" class="card-result"></div>
             </div>
 
             <!-- Shpaklyovka -->
@@ -37,27 +37,55 @@
                 <h3>Shpaklyovka qilish</h3>
                 <p class="price">1 kv.m — 20 000 so'm</p>
                 <div class="input-group">
-                    <input type="number" id="sqm-shpak" placeholder="Necha kv.m?" min="1">
-                    <button onclick="calculate('Shpaklyovka qilish', 20000, 'sqm-shpak')">Hisoblash</button>
+                    <input type="number" id="sqm-shpak" placeholder="Necha kv.m?" min="0" oninput="updateCalculation('Shpaklyovka qilish', 20000, 'sqm-shpak', 'res-shpak')">
                 </div>
+                <div id="res-shpak" class="card-result"></div>
             </div>
 
-            <!-- Malyarka / Bo'yoq -->
+            <!-- Malyarka -->
             <div class="card">
                 <h3>Bo'yoq berish (Malyarka)</h3>
                 <p class="price">1 kv.m — 18 000 so'm</p>
                 <div class="input-group">
-                    <input type="number" id="sqm-boyoq" placeholder="Necha kv.m?" min="1">
-                    <button onclick="calculate('Bo\'yoq berish', 18000, 'sqm-boyoq')">Hisoblash</button>
+                    <input type="number" id="sqm-boyoq" placeholder="Necha kv.m?" min="0" oninput="updateCalculation('Bo\'yoq berish', 18000, 'sqm-boyoq', 'res-boyoq')">
                 </div>
+                <div id="res-boyoq" class="card-result"></div>
             </div>
         </div>
 
-        <!-- Natija va Yuborish oynasi -->
-        <div id="result-box" class="result-box hidden">
-            <h3 id="res-title"></h3>
-            <p id="res-details"></p>
-            <button id="send-btn" class="send-btn">Buyurtmani yuborish</button>
+        <!-- Buyurtma berish formasi -->
+        <div class="order-section">
+            <h2>📦 Buyurtma rasmiylashtirish</h2>
+            
+            <div class="input-box">
+                <label>👤 Ismingiz</label>
+                <input type="text" id="client-name" placeholder="Ismingizni kiriting">
+            </div>
+
+            <div class="input-box">
+                <label>📞 Telefon raqam</label>
+                <input type="tel" id="client-phone" placeholder="+998 90 123 45 67">
+            </div>
+
+            <div class="input-box">
+                <label>📍 Ish bajariladigan manzil (Objekt)</label>
+                <input type="text" id="client-address" placeholder="Toshkent sh., Chilonzor tumani...">
+            </div>
+
+            <div class="input-box">
+                <label>💳 To'lov usuli</label>
+                <select id="payment-method">
+                    <option value="Naqd pul">💵 Naqd pul</option>
+                    <option value="Karta orqali (Click/Payme)">💳 Karta orqali (Click/Payme)</option>
+                </select>
+            </div>
+
+            <div class="total-box">
+                <span>Jami summa:</span>
+                <strong id="grand-total">0 so'm</strong>
+            </div>
+
+            <button id="send-btn" class="send-btn">✅ Buyurtmani tasdiqlash</button>
         </div>
     </div>
 
