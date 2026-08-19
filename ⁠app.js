@@ -1,55 +1,69 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
 
+const services = [
+    { id: 'sqm-oboy', name: 'Oboy yopishtirish', price: 15000 },
+    { id: 'sqm-plitka', name: 'Plitka terish', price: 50000 },
+    { id: 'sqm-shpak', name: 'Shpaklyovka qilish', price: 20000 },
+    { id: 'sqm-boyoq', name: 'Bo\'yoq berish', price: 18000 }
+];
+
 let calculations = {};
 
-function updateCalculation(serviceName, pricePerSqm, inputId) {
-    let sqmInput = document.getElementById(inputId);
-    let sqm = parseFloat(sqmInput.value);
-
-    if (!isNaN(sqm) && sqm > 0) {
-        calculations[serviceName] = { sqm: sqm, total: sqm * pricePerSqm };
-    } else {
-        delete calculations[serviceName];
-    }
-
+function calculateTotal() {
     let grandTotal = 0;
-    for (let service in calculations) {
-        grandTotal += calculations[service].total;
-    }
+    calculations = {};
+
+    services.forEach(service => {
+        let input = document.getElementById(service.id);
+        let val = parseFloat(input.value);
+
+        if (!isNaN(val) && val > 0) {
+            let total = val * service.price;
+            grandTotal += total;
+            calculations[service.name] = { sqm: val, total: total };
+        }
+    });
 
     let bar = document.getElementById('bottom-bar');
+    let formattedTotal = grandTotal.toLocaleString('uz-UZ') + " so'm";
+
     if (grandTotal > 0) {
         bar.classList.remove('hidden');
-        document.getElementById('bar-total').innerText = grandTotal.toLocaleString('uz-UZ') + " so'm";
-        document.getElementById('checkout-total-price').innerText = grandTotal.toLocaleString('uz-UZ') + " so'm";
+        document.getElementById('bar-total').innerText = formattedTotal;
+        document.getElementById('checkout-total-price').innerText = formattedTotal;
     } else {
         bar.classList.add('hidden');
     }
 }
 
-function goToStep2() {
+// Barcha inputlarga dinamik hisoblashni bog'lash
+services.forEach(service => {
+    let input = document.getElementById(service.id);
+    if (input) {
+        input.addEventListener('input', calculateTotal);
+    }
+});
+
+// "Rejaga olish" tugmasi bosilganda 2-bosqichga o'tish
+document.getElementById('bottom-bar').addEventListener('click', function() {
     document.getElementById('step-services').classList.add('hidden');
     document.getElementById('bottom-bar').classList.add('hidden');
     document.getElementById('step-checkout').classList.remove('hidden');
-}
+});
 
-function goToStep1() {
+// Orqaga qaytish
+document.getElementById('back-btn').addEventListener('click', function() {
     document.getElementById('step-checkout').classList.add('hidden');
     document.getElementById('step-services').classList.remove('hidden');
-    
-    let grandTotal = 0;
-    for (let service in calculations) { grandTotal += calculations[service].total; }
-    if (grandTotal > 0) {
-        document.getElementById('bottom-bar').classList.remove('hidden');
-    }
-}
+    calculateTotal();
+});
 
-// Telefon raqami formatini tekshirish va qizil qilish
+// Telefon raqamini tekshirish (XX XXX XX XX -> 9 ta raqam)
 document.getElementById('client-phone').addEventListener('input', function(e) {
     let input = e.target;
-    let val = input.value.replace(/\D/g, ''); // Faqat raqamlarni qoldirish
-    
+    let val = input.value.replace(/\D/g, ''); // Faqat raqamlar
+
     if (val.length === 9) {
         input.classList.remove('invalid');
         document.getElementById('phone-error').classList.add('hidden');
@@ -59,6 +73,7 @@ document.getElementById('client-phone').addEventListener('input', function(e) {
     }
 });
 
+// Buyurtmani tasdiqlash
 document.getElementById('send-btn').addEventListener('click', function() {
     let name = document.getElementById('client-name').value.trim();
     let phoneInput = document.getElementById('client-phone');
