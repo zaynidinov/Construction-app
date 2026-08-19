@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qurilish Kalkulyatori</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Qurilish Xizmatlari</h2>
+        <input type="text" placeholder="Xizmat qidirish...">
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="img-box">Oboy</div>
+            <h3>Oboy yopishtirish</h3>
+            <p>1 kv.m narxi: 15 000 so'm</p>
+            <button onclick="openDetails('Oboy')">Tanlash</button>
+        </div>
+        <div class="card">
+            <div class="img-box">Plitka</div>
+            <h3>Plitka terish</h3>
+            <p>1 kv.m narxi: 50 000 so'm</p>
+            <button onclick="openDetails('Plitka')">Tanlash</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
