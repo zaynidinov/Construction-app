@@ -13,40 +13,45 @@
         <div id="step-services">
             <h2>🛠 Qurilish Xizmatlari</h2>
             <div class="services-grid">
+                
                 <div class="card">
                     <h3>Oboy yopishtirish</h3>
                     <p class="price">1 kv.m — 15 000 so'm</p>
                     <div class="input-row">
-                        <input type="number" id="sqm-oboy" placeholder="Necha kv.m?" min="0">
-                        <span id="subtotal-oboy" class="subtotal-price">0 so'm</span>
+                        <input type="number" class="sqm-input" data-price="15000" data-name="Oboy yopishtirish" placeholder="Necha kv.m?" min="0">
+                        <span class="subtotal-price">0 so'm</span>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3>Plitka terish</h3>
                     <p class="price">1 kv.m — 50 000 so'm</p>
                     <div class="input-row">
-                        <input type="number" id="sqm-plitka" placeholder="Necha kv.m?" min="0">
-                        <span id="subtotal-plitka" class="subtotal-price">0 so'm</span>
+                        <input type="number" class="sqm-input" data-price="50000" data-name="Plitka terish" placeholder="Necha kv.m?" min="0">
+                        <span class="subtotal-price">0 so'm</span>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3>Shpaklyovka qilish</h3>
                     <p class="price">1 kv.m — 20 000 so'm</p>
                     <div class="input-row">
-                        <input type="number" id="sqm-shpak" placeholder="Necha kv.m?" min="0">
-                        <span id="subtotal-shpak" class="subtotal-price">0 so'm</span>
+                        <input type="number" class="sqm-input" data-price="20000" data-name="Shpaklyovka qilish" placeholder="Necha kv.m?" min="0">
+                        <span class="subtotal-price">0 so'm</span>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3>Bo'yoq berish (Malyarka)</h3>
                     <p class="price">1 kv.m — 18 000 so'm</p>
                     <div class="input-row">
-                        <input type="number" id="sqm-boyoq" placeholder="Necha kv.m?" min="0">
-                        <span id="subtotal-boyoq" class="subtotal-price">0 so'm</span>
+                        <input type="number" class="sqm-input" data-price="18000" data-name="Bo'yoq berish" placeholder="Necha kv.m?" min="0">
+                        <span class="subtotal-price">0 so'm</span>
                     </div>
                 </div>
+
             </div>
-            <div style="height: 100px;"></div>
+            <div style="height: 120px;"></div>
         </div>
 
         <!-- 2-BOSQICH: Anketa -->
@@ -58,18 +63,21 @@
                 <label>👤 Ismingiz</label>
                 <input type="text" id="client-name" placeholder="Ismingizni kiriting">
             </div>
+
             <div class="input-box">
                 <label>📞 Telefon raqam</label>
-                <div class="phone-input-wrap">
-                    <span class="phone-prefix">+998</span>
-                    <input type="tel" id="client-phone" placeholder="90 123 45 67" maxlength="9">
+                <div class="phone-wrap" id="phone-wrap">
+                    <span class="prefix">+998</span>
+                    <input type="tel" id="client-phone" placeholder="901234567" maxlength="9">
                 </div>
-                <small id="phone-error" class="error-text hidden">Raqamni to'liq 9 ta xonada kiriting!</small>
+                <small id="phone-error" class="error-text hidden">Telefon raqam to'liq 9 ta raqam bo'lishi shart!</small>
             </div>
+
             <div class="input-box">
                 <label>📍 Ish bajariladigan manzil (Ob'ekt)</label>
                 <input type="text" id="client-address" placeholder="Toshkent sh., Chilonzor tumani...">
             </div>
+
             <div class="input-box">
                 <label>💳 To'lov usuli</label>
                 <select id="payment-method">
@@ -87,7 +95,7 @@
         </div>
     </div>
 
-    <!-- Pastki qat'iy tugma -->
+    <!-- Pastki qat'iy "Rejaga qo'shish" tugmasi -->
     <div id="bottom-bar" class="bottom-bar hidden">
         <span>📋 Rejaga qo'shish</span>
         <strong id="bar-total">0 so'm</strong>
