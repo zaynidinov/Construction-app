@@ -9,35 +9,47 @@
 </head>
 <body>
     <div class="container">
-        <!-- 1-BOSQICH: Xizmatlar va kv.m kiritish -->
+        <!-- 1-BOSQICH: Xizmatlar -->
         <div id="step-services">
             <h2>🛠 Qurilish Xizmatlari</h2>
             <div class="services-grid">
                 <div class="card">
                     <h3>Oboy yopishtirish</h3>
                     <p class="price">1 kv.m — 15 000 so'm</p>
-                    <input type="number" id="sqm-oboy" placeholder="Necha kv.m?" min="0">
+                    <div class="input-row">
+                        <input type="number" id="sqm-oboy" placeholder="Necha kv.m?" min="0">
+                        <span id="subtotal-oboy" class="subtotal-price">0 so'm</span>
+                    </div>
                 </div>
                 <div class="card">
                     <h3>Plitka terish</h3>
                     <p class="price">1 kv.m — 50 000 so'm</p>
-                    <input type="number" id="sqm-plitka" placeholder="Necha kv.m?" min="0">
+                    <div class="input-row">
+                        <input type="number" id="sqm-plitka" placeholder="Necha kv.m?" min="0">
+                        <span id="subtotal-plitka" class="subtotal-price">0 so'm</span>
+                    </div>
                 </div>
                 <div class="card">
                     <h3>Shpaklyovka qilish</h3>
                     <p class="price">1 kv.m — 20 000 so'm</p>
-                    <input type="number" id="sqm-shpak" placeholder="Necha kv.m?" min="0">
+                    <div class="input-row">
+                        <input type="number" id="sqm-shpak" placeholder="Necha kv.m?" min="0">
+                        <span id="subtotal-shpak" class="subtotal-price">0 so'm</span>
+                    </div>
                 </div>
                 <div class="card">
                     <h3>Bo'yoq berish (Malyarka)</h3>
                     <p class="price">1 kv.m — 18 000 so'm</p>
-                    <input type="number" id="sqm-boyoq" placeholder="Necha kv.m?" min="0">
+                    <div class="input-row">
+                        <input type="number" id="sqm-boyoq" placeholder="Necha kv.m?" min="0">
+                        <span id="subtotal-boyoq" class="subtotal-price">0 so'm</span>
+                    </div>
                 </div>
             </div>
             <div style="height: 100px;"></div>
         </div>
 
-        <!-- 2-BOSQICH: Buyurtma va mijoz ma'lumotlari -->
+        <!-- 2-BOSQICH: Anketa -->
         <div id="step-checkout" class="hidden">
             <button class="back-btn" id="back-btn">← Ro'yxatga qaytish</button>
             <h2>📦 Buyurtma rasmiylashtirish</h2>
@@ -48,8 +60,11 @@
             </div>
             <div class="input-box">
                 <label>📞 Telefon raqam</label>
-                <input type="tel" id="client-phone" placeholder="90 123 45 67" maxlength="12">
-                <small id="phone-error" class="error-text hidden">Raqamni XX XXX XX XX formatida (9 ta raqam) kiriting!</small>
+                <div class="phone-input-wrap">
+                    <span class="phone-prefix">+998</span>
+                    <input type="tel" id="client-phone" placeholder="90 123 45 67" maxlength="9">
+                </div>
+                <small id="phone-error" class="error-text hidden">Raqamni to'liq 9 ta xonada kiriting!</small>
             </div>
             <div class="input-box">
                 <label>📍 Ish bajariladigan manzil (Ob'ekt)</label>
@@ -64,7 +79,7 @@
             </div>
             
             <div class="checkout-total">
-                <span>Umumiy summa:</span>
+                <span>Jami summa:</span>
                 <strong id="checkout-total-price">0 so'm</strong>
             </div>
 
@@ -72,9 +87,9 @@
         </div>
     </div>
 
-    <!-- Pastki qat'iy yopishgan panel -->
+    <!-- Pastki qat'iy tugma -->
     <div id="bottom-bar" class="bottom-bar hidden">
-        <span>📋 Rejaga olish</span>
+        <span>📋 Rejaga qo'shish</span>
         <strong id="bar-total">0 so'm</strong>
     </div>
 
