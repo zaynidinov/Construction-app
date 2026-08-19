@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qurilish Xizmatlari</title>
+    <title>Azizbek Construction</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -34,7 +34,8 @@
                     <input type="number" id="sqm-boyoq" placeholder="Necha kv.m?" min="0" oninput="updateCalculation('Bo\'yoq berish', 18000, 'sqm-boyoq')">
                 </div>
             </div>
-            <div style="height: 90px;"></div>
+            <!-- Tugma ostida joy qolishi uchun -->
+            <div style="height: 100px;"></div>
         </div>
 
         <!-- 2-STEP: Ma'lumotlarni kiritish -->
@@ -49,7 +50,7 @@
             <div class="input-box">
                 <label>📞 Telefon raqam</label>
                 <input type="tel" id="client-phone" placeholder="90 123 45 67" maxlength="12">
-                <small id="phone-error" class="error-text hidden">Raqamni XX XXX XX XX formatda kiriting!</small>
+                <small id="phone-error" class="error-text hidden">Raqamni 9 ta xonada kiriting!</small>
             </div>
             <div class="input-box">
                 <label>📍 Ish bajariladigan manzil (Objekt)</label>
@@ -72,7 +73,7 @@
         </div>
     </div>
 
-    <!-- Pastki qat'iy yopishgan tugma -->
+    <!-- Pastki qat'iy yopishgan tugma bar -->
     <div id="bottom-bar" class="bottom-bar hidden" onclick="goToStep2()">
         <span>📋 Rejani davom ettirish</span>
         <strong id="bar-total">0 so'm</strong>
