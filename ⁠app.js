@@ -3,29 +3,40 @@ tg.expand();
 
 let calculations = {};
 
-function updateCalculation(serviceName, pricePerSqm, inputId, resultDivId) {
+function updateCalculation(serviceName, pricePerSqm, inputId) {
     let sqmInput = document.getElementById(inputId);
     let sqm = parseFloat(sqmInput.value);
-    let resultDiv = document.getElementById(resultDivId);
 
     if (sqm && sqm > 0) {
-        let total = sqm * pricePerSqm;
-        calculations[serviceName] = { sqm: sqm, total: total };
-        resultDiv.innerText = "Narxi: " + total.toLocaleString('uz-UZ') + " so'm";
+        calculations[serviceName] = { sqm: sqm, total: sqm * pricePerSqm };
     } else {
         delete calculations[serviceName];
-        resultDiv.innerText = "";
     }
 
-    calculateGrandTotal();
-}
-
-function calculateGrandTotal() {
     let grandTotal = 0;
     for (let service in calculations) {
         grandTotal += calculations[service].total;
     }
-    document.getElementById('grand-total').innerText = grandTotal.toLocaleString('uz-UZ') + " so'm";
+
+    let bar = document.getElementById('bottom-bar');
+    if (grandTotal > 0) {
+        bar.classList.remove('hidden');
+        document.getElementById('bar-total').innerText = grandTotal.toLocaleString('uz-UZ') + " so'm";
+    } else {
+        bar.classList.add('hidden');
+    }
+}
+
+function goToStep2() {
+    document.getElementById('step-services').classList.add('hidden');
+    document.getElementById('bottom-bar').classList.add('hidden');
+    document.getElementById('step-checkout').classList.remove('hidden');
+}
+
+function goToStep1() {
+    document.getElementById('step-checkout').classList.add('hidden');
+    document.getElementById('step-services').classList.remove('hidden');
+    document.getElementById('bottom-bar').classList.remove('hidden');
 }
 
 document.getElementById('send-btn').addEventListener('click', function() {
@@ -34,29 +45,18 @@ document.getElementById('send-btn').addEventListener('click', function() {
     let address = document.getElementById('client-address').value.trim();
     let payment = document.getElementById('payment-method').value;
 
-    if (Object.keys(calculations).length === 0) {
-        alert("Iltimos, kamida bitta xizmat uchun kvadrat metrni kiriting!");
-        return;
-    }
-
     if (!name || !phone || !address) {
-        alert("Iltimos, ismingiz, telefon raqamingiz va manzilingizni to'liq kiriting!");
+        alert("Iltimos, barcha maydonlarni to'liq kiriting!");
         return;
     }
 
-    let orderDetails = "🛠 NEW BUYURTMA:\n\n";
-    let grandTotal = 0;
+    let orderData = {
+        name: name,
+        phone: phone,
+        address: address,
+        payment: payment,
+        items: calculations
+    };
 
-    for (let service in calculations) {
-        orderDetails += "• " + service + ": " + calculations[service].sqm + " kv.m (" + calculations[service].total.toLocaleString('uz-UZ') + " so'm)\n";
-        grandTotal += calculations[service].total;
-    }
-
-    orderDetails += "\n💰 Jami: " + grandTotal.toLocaleString('uz-UZ') + " so'm";
-    orderDetails += "\n\n👤 Mijoz: " + name;
-    orderDetails += "\n📞 Tel: " + phone;
-    orderDetails += "\n📍 Manzil: " + address;
-    orderDetails += "\n💳 To'lov: " + payment;
-
-    tg.sendData(orderDetails);
+    tg.sendData(JSON.stringify(orderData));
 });
